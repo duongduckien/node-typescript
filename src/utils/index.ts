@@ -1,4 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
+import environment from './env';
 
 type Wrapper = ((router: Router) => void);
 export const applyMiddleware = (middlewareWrappers: Wrapper[], router: Router) => {
@@ -20,3 +21,5 @@ export const applyRoutes = (routes: IRoute[], router: Router) => {
         (router as any)[method](path, handler);
     }
 };
+
+export const env = environment;

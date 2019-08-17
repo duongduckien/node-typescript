@@ -3,13 +3,13 @@ import http from 'http';
 import os from 'os';
 
 import { Routes } from './routes/index';
-import { applyMiddleware } from './utils';
+import { applyMiddleware, env } from './utils';
 import middleware from './middleware';
 
 const app = express();
 applyMiddleware(middleware, app);
 
-const PORT = process.env.PORT || 3333;
+const PORT = env.PORT || 3333;
 
 Routes.init(app, express.Router());
 
