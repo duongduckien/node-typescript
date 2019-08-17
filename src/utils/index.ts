@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import environment from './env';
 
 type Wrapper = ((router: Router) => void);
-export const applyMiddleware = (middlewareWrappers: Wrapper[], router: Router) => {
+const applyMiddleware = (middlewareWrappers: Wrapper[], router: Router) => {
     for (const wrapper of middlewareWrappers) {
         wrapper(router);
     }
@@ -15,11 +15,13 @@ interface IRoute {
     handler: Handler | Handler[];
 }
 
-export const applyRoutes = (routes: IRoute[], router: Router) => {
+const applyRoutes = (routes: IRoute[], router: Router) => {
     for (const route of routes) {
         const { method, path, handler } = route;
         (router as any)[method](path, handler);
     }
 };
 
-export const env = environment;
+const env = environment;
+
+export { applyMiddleware, applyRoutes, env };

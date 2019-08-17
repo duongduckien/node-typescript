@@ -4,16 +4,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const env_1 = __importDefault(require("./env"));
-exports.applyMiddleware = (middlewareWrappers, router) => {
+const applyMiddleware = (middlewareWrappers, router) => {
     for (const wrapper of middlewareWrappers) {
         wrapper(router);
     }
 };
-exports.applyRoutes = (routes, router) => {
+exports.applyMiddleware = applyMiddleware;
+const applyRoutes = (routes, router) => {
     for (const route of routes) {
         const { method, path, handler } = route;
         router[method](path, handler);
     }
 };
-exports.env = env_1.default;
+exports.applyRoutes = applyRoutes;
+const env = env_1.default;
+exports.env = env;
 //# sourceMappingURL=index.js.map
